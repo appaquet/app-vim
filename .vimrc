@@ -94,20 +94,21 @@ set nocompatible        " be iMproved
 
 	"" Solarized theme
 		Bundle 'altercation/vim-colors-solarized'
+		if filereadable(expand("~/.vim/bundle/vim-colors-solarized/colors/solarized.vim"))
+			color solarized                 " load a colorscheme
+			let g:solarized_termtrans=1
+			let g:solarized_termcolors=256
+			let g:solarized_contrast="high"
+			let g:solarized_visibility="high"
+		endif
+
 		if has('gui_macvim')
 			set transparency=5          " Make the window slightly transparent
 			set guioptions-=T           " remove the toolbar
-			if filereadable(expand("~/.vim/bundle/vim-colors-solarized/colors/solarized.vim"))
-				color solarized                 " load a colorscheme
-			endif
 		else
-			color desert
+			set t_Co=256		    " make sure vim uses 256 colors
 		endif
 
-		let g:solarized_termtrans=1
-		let g:solarized_termcolors=256
-		let g:solarized_contrast="high"
-		let g:solarized_visibility="high"
 
 
 
