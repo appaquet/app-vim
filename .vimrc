@@ -61,8 +61,9 @@ set nocompatible        " be iMproved
 
 	"" Nerdtree
 		Bundle 'scrooloose/nerdtree'
+		map <C-e> :NERDTreeToggle<CR>:NERDTreeMirror<CR>
 
-	"" MiniBugExplorer
+	"" MiniBufExplorer
 		Bundle 'fholgado/minibufexpl.vim'
 		let g:miniBufExplModSelTarget = 1
 		let g:miniBufExplMapWindowNavVim = 1 
