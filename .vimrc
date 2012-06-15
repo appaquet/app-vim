@@ -89,9 +89,6 @@ set nocompatible        " be iMproved
 			Bundle 'mileszs/ack.vim'
 		endif
 
-	"" AutoCompletePopup
-		Bundle 'vim-scripts/AutoComplPop'
-
 	"" Pig filetype
 		Bundle 'vim-scripts/pig.vim'
 		augroup filetypedetect
