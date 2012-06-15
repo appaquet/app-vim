@@ -1,4 +1,6 @@
 *.vim
 *vim
 vim-*
+Auto*
+PIV
 nerdtree

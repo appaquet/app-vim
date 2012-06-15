@@ -78,13 +78,19 @@ set nocompatible        " be iMproved
 		let g:ctrlp_persistent_input=0
 		set wildignore+=*/.git*,*/.hg/*,*/.svn/*,*/_*,*/.DS*,*/.*swp
 
-	"" Vim
+	"" Git integration
 		Bundle 'tpope/vim-fugitive'
+
+	"" PHP
+            Bundle 'spf13/PIV'
 
 	"" Ack
 		if executable('ack')
 			Bundle 'mileszs/ack.vim'
 		endif
+
+	"" AutoCompletePopup
+		Bundle 'vim-scripts/AutoComplPop'
 
 	"" Pig filetype
 		Bundle 'vim-scripts/pig.vim'
@@ -108,8 +114,6 @@ set nocompatible        " be iMproved
 		else
 			set t_Co=256		    " make sure vim uses 256 colors
 		endif
-
-
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
