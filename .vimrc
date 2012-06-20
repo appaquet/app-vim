@@ -38,7 +38,6 @@ set nocompatible        " be iMproved
 	map <D-7> :br!<CR>:bn!<CR>:bn!<CR>:bn!<CR>:bn!<CR>:bn!<CR>:bn!<CR>
 	map <D-8> :br!<CR>:bn!<CR>:bn!<CR>:bn!<CR>:bn!<CR>:bn!<CR>:bn!<CR>:bn!<CR>
 	map <D-9> :br!<CR>:bn!<CR>:bn!<CR>:bn!<CR>:bn!<CR>:bn!<CR>:bn!<CR>:bn!<CR>:bn!<CR>
-	map <D-0> :Bclose!<CR>
 	map <D-u> :!./up_sandbox.sh "%" <CR>
 	map <D-/> :!php -l "%" <CR>
 
@@ -81,9 +80,6 @@ set nocompatible        " be iMproved
 	"" Git integration
 		Bundle 'tpope/vim-fugitive'
 
-	"" PHP
-            Bundle 'spf13/PIV'
-
 	"" Ack
 		if executable('ack')
 			Bundle 'mileszs/ack.vim'
@@ -94,6 +90,12 @@ set nocompatible        " be iMproved
 		augroup filetypedetect
 			au BufNewFile,BufRead *.pig set filetype=pig syntax=pig
 		augroup END
+
+	"" Bclose
+		Bundle 'cespare/vim-bclose'
+		map <D-0> <Plug>Kwbd
+		nmap <leader>w! <Plug>Kwbd
+
 
 	"" Solarized theme
 		Bundle 'altercation/vim-colors-solarized'
