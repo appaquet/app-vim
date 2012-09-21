@@ -2,7 +2,7 @@
 
 usage() {
 cat << EOF
-usage: $0 [options] <-i regex>
+usage: $0 [options] <host regex>
 
 OPTIONS:
 -h              Show this message
@@ -16,7 +16,7 @@ EOF
 DRY=0
 REAL=0
 ONE_FILTER=0
-cat ~/etc/tmuxcluster_servers.txt > /tmp/tmuxcluster_servers
+cat ~/etc/tssh_servers.txt > /tmp/tssh_servers
 PARAMS=$*
 while getopts ?~@~\hdri:e:s:?~@~] OPTION; do
 	case $OPTION in
@@ -32,20 +32,28 @@ while getopts ?~@~\hdri:e:s:?~@~] OPTION; do
 		;;  
 		s)
 			TMUXSESSION=$OPTARG
+			tmux rename-session $TMUXSESSION
 		;;
 		i)  
 			ONE_FILTER=1
-			cat /tmp/tmuxcluster_servers | grep "$OPTARG" > /tmp/tmuxcluster_filter
-			mv /tmp/tmuxcluster_filter /tmp/tmuxcluster_servers
+			cat /tmp/tssh_servers | grep "$OPTARG" > /tmp/tssh_filter
+			mv /tmp/tssh_filter /tmp/tssh_servers
 		;;  
 		e)  
 			ONE_FILTER=1
-			cat /tmp/tmuxcluster_servers | grep -v "$OPTARG" > /tmp/tmuxcluster_filter
-			mv /tmp/tmuxcluster_filter /tmp/tmuxcluster_servers
+			cat /tmp/tssh_servers | grep -v "$OPTARG" > /tmp/tssh_filter
+			mv /tmp/tssh_filter /tmp/tssh_servers
 		;;  
 	esac
 done
 shift $((OPTIND-1))
+
+if [[ "$*" != "" ]]; then
+	ONE_FILTER=1
+	cat /tmp/tssh_servers | grep "$*" > /tmp/tssh_filter
+	mv /tmp/tssh_filter /tmp/tssh_servers
+	tmux rename-window $*
+fi
 
 if [[ $ONE_FILTER -ne 1 ]]; then
 	usage
@@ -54,7 +62,7 @@ fi
 
 if [[ $REAL -eq 1 ]]; then
 
-	for SERVER in `cat /tmp/tmuxcluster_servers`; do
+	for SERVER in `cat /tmp/tssh_servers`; do
 		if [ $DRY -ne 1 ]; then
 			echo "ssh $SERVER" > /tmp/bash-rcfile
 			tmux splitw "bash --rcfile /tmp/bash-rcfile"
@@ -65,7 +73,6 @@ if [[ $REAL -eq 1 ]]; then
 	done
 
 	if [ $DRY -ne 1 ]; then
-		tmux rename-session $F1
 		tmux set-window-option synchronize-panes on
 		tmux select-layout tiled
 	fi
