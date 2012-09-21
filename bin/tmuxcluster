@@ -1,0 +1,78 @@
+#/bin/sh
+
+usage() {
+cat << EOF
+usage: $0 [options] <-i regex>
+
+OPTIONS:
+-h              Show this message
+-d              Run in dry mode (only print servers that would open)
+-s <name>	Tmux session name
+-i <regex>	Filter servers (inclusion)
+-e <regex>	Filter servers (exclusion)
+EOF
+}
+
+DRY=0
+REAL=0
+ONE_FILTER=0
+cat ~/etc/tmuxcluster_servers.txt > /tmp/tmuxcluster_servers
+PARAMS=$*
+while getopts ?~@~\hdri:e:s:?~@~] OPTION; do
+	case $OPTION in
+		h)  
+			usage
+			exit 1
+		;;  
+		r)
+			REAL=1
+		;;
+		d)  
+			DRY=1
+		;;  
+		s)
+			TMUXSESSION=$OPTARG
+		;;
+		i)  
+			ONE_FILTER=1
+			cat /tmp/tmuxcluster_servers | grep "$OPTARG" > /tmp/tmuxcluster_filter
+			mv /tmp/tmuxcluster_filter /tmp/tmuxcluster_servers
+		;;  
+		e)  
+			ONE_FILTER=1
+			cat /tmp/tmuxcluster_servers | grep -v "$OPTARG" > /tmp/tmuxcluster_filter
+			mv /tmp/tmuxcluster_filter /tmp/tmuxcluster_servers
+		;;  
+	esac
+done
+shift $((OPTIND-1))
+
+if [[ $ONE_FILTER -ne 1 ]]; then
+	usage
+	exit
+fi
+
+if [[ $REAL -eq 1 ]]; then
+
+	for SERVER in `cat /tmp/tmuxcluster_servers`; do
+		if [ $DRY -ne 1 ]; then
+			echo "ssh $SERVER" > /tmp/bash-rcfile
+			tmux splitw "bash --rcfile /tmp/bash-rcfile"
+			tmux select-layout tiled
+		else
+			echo $SERVER
+		fi
+	done
+
+	if [ $DRY -ne 1 ]; then
+		tmux rename-session $F1
+		tmux set-window-option synchronize-panes on
+		tmux select-layout tiled
+	fi
+else
+	if [ $DRY -ne 1 ]; then
+		tmux new "exec sh $0 -r $PARAMS"	
+	else
+		sh $0 -r $PARAMS
+	fi
+fi

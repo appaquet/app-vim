@@ -30,14 +30,23 @@ set nocompatible        " be iMproved
 "" Macvim Cmd shorcuts
 
 	map <D-1> :br!<CR> 
+	map <Leader>1 :br!<CR> 
 	map <D-2> :br!<CR>:bn!<CR> 
+	map <Leader>2 :br!<CR>:bn!<CR> 
 	map <D-3> :br!<CR>:bn!<CR>:bn!<CR>
+	map <Leader>3 :br!<CR>:bn!<CR>:bn!<CR>
 	map <D-4> :br!<CR>:bn!<CR>:bn!<CR>:bn!<CR>
+	map <Leader>4 :br!<CR>:bn!<CR>:bn!<CR>:bn!<CR>
 	map <D-5> :br!<CR>:bn!<CR>:bn!<CR>:bn!<CR>:bn!<CR>
+	map <Leader>5 :br!<CR>:bn!<CR>:bn!<CR>:bn!<CR>:bn!<CR>
 	map <D-6> :br!<CR>:bn!<CR>:bn!<CR>:bn!<CR>:bn!<CR>:bn!<CR>
+	map <Leader>6 :br!<CR>:bn!<CR>:bn!<CR>:bn!<CR>:bn!<CR>:bn!<CR>
 	map <D-7> :br!<CR>:bn!<CR>:bn!<CR>:bn!<CR>:bn!<CR>:bn!<CR>:bn!<CR>
+	map <Leader>7 :br!<CR>:bn!<CR>:bn!<CR>:bn!<CR>:bn!<CR>:bn!<CR>:bn!<CR>
 	map <D-8> :br!<CR>:bn!<CR>:bn!<CR>:bn!<CR>:bn!<CR>:bn!<CR>:bn!<CR>:bn!<CR>
+	map <Leader>8 :br!<CR>:bn!<CR>:bn!<CR>:bn!<CR>:bn!<CR>:bn!<CR>:bn!<CR>:bn!<CR>
 	map <D-9> :br!<CR>:bn!<CR>:bn!<CR>:bn!<CR>:bn!<CR>:bn!<CR>:bn!<CR>:bn!<CR>:bn!<CR>
+	map <Leader>9 :br!<CR>:bn!<CR>:bn!<CR>:bn!<CR>:bn!<CR>:bn!<CR>:bn!<CR>:bn!<CR>:bn!<CR>
 	map <D-u> :!./up_sandbox.sh "%" <CR>
 	map <D-/> :!php -l "%" <CR>
 
@@ -63,19 +72,20 @@ set nocompatible        " be iMproved
 		map <C-e> :NERDTreeToggle<CR>:NERDTreeMirror<CR>
 
 	"" MiniBufExplorer
-		Bundle 'fholgado/minibufexpl.vim'
+		let g:miniBufExplorerMoreThanOne=1
 		let g:miniBufExplModSelTarget = 1
 		let g:miniBufExplMapWindowNavVim = 1 
 		let g:miniBufExplUseSingleClick = 1
+		Bundle 'fholgado/minibufexpl.vim'
 
 	"" Powerline
 		Bundle 'Lokaltog/vim-powerline'
 
 	"" Ctrlp
-		Bundle 'kien/ctrlp.vim'
 		let g:ctrlp_working_path_mode=0
 		let g:ctrlp_persistent_input=0
 		set wildignore+=*/.git*,*/.hg/*,*/.svn/*,*/_*,*/.DS*,*/.*swp
+		Bundle 'kien/ctrlp.vim'
 
 	"" Git integration
 		Bundle 'tpope/vim-fugitive'
@@ -94,8 +104,10 @@ set nocompatible        " be iMproved
 	"" Bclose
 		Bundle 'cespare/vim-bclose'
 		map <D-0> <Plug>Kwbd
-		nmap <leader>w! <Plug>Kwbd
+		nmap <leader>w <Plug>Kwbd
 
+	"" Pythoncomplete
+		Bundle 'vim-scripts/pythoncomplete'
 
 	"" Solarized theme
 		Bundle 'altercation/vim-colors-solarized'
