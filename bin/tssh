@@ -1,4 +1,4 @@
-#/bin/sh
+#!/bin/bash
 
 usage() {
 cat << EOF
@@ -18,7 +18,7 @@ REAL=0
 ONE_FILTER=0
 cat ~/etc/tssh_servers.txt > /tmp/tssh_servers
 PARAMS=$*
-while getopts ?~@~\hdri:e:s:?~@~] OPTION; do
+while getopts "hdri:e:s:" OPTION; do
 	case $OPTION in
 		h)  
 			usage
@@ -63,7 +63,7 @@ fi
 if [[ $REAL -eq 1 ]]; then
 
 	for SERVER in `cat /tmp/tssh_servers`; do
-		if [ $DRY -ne 1 ]; then
+		if [[ $DRY -ne 1 ]]; then
 			echo "ssh $SERVER" > /tmp/bash-rcfile
 			tmux splitw "bash --rcfile /tmp/bash-rcfile"
 			tmux select-layout tiled
@@ -72,12 +72,12 @@ if [[ $REAL -eq 1 ]]; then
 		fi
 	done
 
-	if [ $DRY -ne 1 ]; then
+	if [[ $DRY -ne 1 ]]; then
 		tmux set-window-option synchronize-panes on
 		tmux select-layout tiled
 	fi
 else
-	if [ $DRY -ne 1 ]; then
+	if [[ $DRY -ne 1 ]]; then
 		tmux new "exec sh $0 -r $PARAMS"	
 	else
 		sh $0 -r $PARAMS
