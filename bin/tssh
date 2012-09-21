@@ -52,7 +52,6 @@ if [[ "$*" != "" ]]; then
 	ONE_FILTER=1
 	cat /tmp/tssh_servers | grep "$*" > /tmp/tssh_filter
 	mv /tmp/tssh_filter /tmp/tssh_servers
-	tmux rename-window $*
 fi
 
 if [[ $ONE_FILTER -ne 1 ]]; then
@@ -73,6 +72,7 @@ if [[ $REAL -eq 1 ]]; then
 	done
 
 	if [[ $DRY -ne 1 ]]; then
+		tmux rename-window $*
 		tmux set-window-option synchronize-panes on
 		tmux select-layout tiled
 	fi
