@@ -21,6 +21,7 @@ set nocompatible        " be iMproved
 	set smartindent
 	set autoindent          " indent at the same level of the previous line
 	set mouse=a             " automatically enable mouse usage
+	set ttymouse=xterm2	" make vim works in tmux
 
 	if !has('gui')
 		set term=$TERM          " Make arrow and other keys work
