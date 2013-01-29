@@ -110,6 +110,12 @@ set nocompatible        " be iMproved
 	"" Pythoncomplete
 		Bundle 'vim-scripts/pythoncomplete'
 
+	"" JSON
+		Bundle 'vim-scripts/JSON.vim'
+		augroup filetypedetect
+			au! BufRead,BufNewFile *.json set filetype=json 
+		augroup END
+
 	"" Solarized theme
 		Bundle 'altercation/vim-colors-solarized'
 		if filereadable(expand("~/.vim/bundle/vim-colors-solarized/colors/solarized.vim"))
