@@ -15,16 +15,16 @@ set nocompatible        " be iMproved
 	set nu                  " Line numbers on
 	set smartcase           " case sensitive when uc present
 	set ignorecase          " case insensitive search
-	set hidden		" Buffer switching without saving
+	set hidden              " Buffer switching without saving
 
-	set autoread		" Auto reread modified file
+	set autoread            " Auto reread modified file
 	set smartindent
 	set autoindent          " indent at the same level of the previous line
 	set mouse=a             " automatically enable mouse usage
-	set ttymouse=xterm2	" make vim works in tmux
+	set ttymouse=xterm2	    " make vim works in tmux
 
 	if !has('gui')
-		set term=$TERM          " Make arrow and other keys work
+		set term=$TERM        " Make arrow and other keys work
 	endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -34,22 +34,22 @@ set nocompatible        " be iMproved
 	map <Leader>1 :br!<CR> 
 	map <D-2> :br!<CR>:bn!<CR> 
 	map <Leader>2 :br!<CR>:bn!<CR> 
-	map <D-3> :br!<CR>:bn!<CR>:bn!<CR>
-	map <Leader>3 :br!<CR>:bn!<CR>:bn!<CR>
-	map <D-4> :br!<CR>:bn!<CR>:bn!<CR>:bn!<CR>
-	map <Leader>4 :br!<CR>:bn!<CR>:bn!<CR>:bn!<CR>
-	map <D-5> :br!<CR>:bn!<CR>:bn!<CR>:bn!<CR>:bn!<CR>
-	map <Leader>5 :br!<CR>:bn!<CR>:bn!<CR>:bn!<CR>:bn!<CR>
-	map <D-6> :br!<CR>:bn!<CR>:bn!<CR>:bn!<CR>:bn!<CR>:bn!<CR>
-	map <Leader>6 :br!<CR>:bn!<CR>:bn!<CR>:bn!<CR>:bn!<CR>:bn!<CR>
-	map <D-7> :br!<CR>:bn!<CR>:bn!<CR>:bn!<CR>:bn!<CR>:bn!<CR>:bn!<CR>
-	map <Leader>7 :br!<CR>:bn!<CR>:bn!<CR>:bn!<CR>:bn!<CR>:bn!<CR>:bn!<CR>
-	map <D-8> :br!<CR>:bn!<CR>:bn!<CR>:bn!<CR>:bn!<CR>:bn!<CR>:bn!<CR>:bn!<CR>
-	map <Leader>8 :br!<CR>:bn!<CR>:bn!<CR>:bn!<CR>:bn!<CR>:bn!<CR>:bn!<CR>:bn!<CR>
-	map <D-9> :br!<CR>:bn!<CR>:bn!<CR>:bn!<CR>:bn!<CR>:bn!<CR>:bn!<CR>:bn!<CR>:bn!<CR>
-	map <Leader>9 :br!<CR>:bn!<CR>:bn!<CR>:bn!<CR>:bn!<CR>:bn!<CR>:bn!<CR>:bn!<CR>:bn!<CR>
-	map <D-u> :!./up_sandbox.sh "%" <CR>
-	map <D-/> :!php -l "%" <CR>
+	map <D-3> :br!<CR>:bn! 2<CR>
+	map <Leader>3 :br!<CR>:bn! 2<CR>
+	map <D-4> :br!<CR>:bn! 3<CR>
+	map <Leader>4 :br!<CR>:bn! 3<CR>
+	map <D-5> :br!<CR>:bn! 4<CR>
+	map <Leader>5 :br!<CR>:bn! 4<CR>
+	map <D-6> :br!<CR>:bn! 5<CR>
+	map <Leader>6 :br!<CR>:bn! 5<CR>
+	map <D-7> :br!<CR>:bn! 6<CR>
+	map <Leader>7 :br!<CR>:bn! 6<CR>
+	map <D-8> :br!<CR>:bn! 7<CR>
+	map <Leader>8 :br!<CR>:bn! 7<CR>
+	map <D-9> :br!<CR>:bn! 8<CR>
+	map <Leader>9 :br!<CR>:bn! 8<CR>
+	map <Leader>] :bn!<CR>
+	map <Leader>[ :bp!<CR>
 
 
 
@@ -85,11 +85,8 @@ set nocompatible        " be iMproved
 	"" Ctrlp
 		let g:ctrlp_working_path_mode=0
 		let g:ctrlp_persistent_input=0
-		set wildignore+=*/.git*,*/.hg/*,*/.svn/*,*/_*,*/.DS*,*/.*swp
+		set wildignore+=*/.git*,*/.hg/*,*/.svn/*,*/_*,*/.DS*,*/.*swp,*/*.d,*/*.o
 		Bundle 'kien/ctrlp.vim'
-
-	"" Git integration
-		Bundle 'tpope/vim-fugitive'
 
 	"" Ack
 		if executable('ack')
@@ -101,6 +98,27 @@ set nocompatible        " be iMproved
 		augroup filetypedetect
 			au BufNewFile,BufRead *.pig set filetype=pig syntax=pig
 		augroup END
+
+	"" Clang Complete
+		Bundle 'Rip-Rip/clang_complete'
+		autocmd FileType make setlocal noexpandtab
+		autocmd FileType hpp setlocal expandtab shiftwidth=2 tabstop=2
+		autocmd FileType h setlocal expandtab shiftwidth=2 tabstop=2
+		autocmd FileType cpp setlocal expandtab shiftwidth=2 tabstop=2
+		function! SwitchSourceHeader()
+			if (expand ("%:e") == "cpp")
+				find %:t:r.hpp
+			else
+				find %:t:r.cpp
+			endif
+		endfunction
+
+		nmap <leader>s :call SwitchSourceHeader()<CR>
+
+	"" Syntastic
+		Bundle 'scrooloose/syntastic'
+		let g:syntastic_cpp_compiler_options = '-std=c++0x'
+		let g:syntastic_cpp_check_header = 1
 
 	"" Bclose
 		Bundle 'cespare/vim-bclose'
