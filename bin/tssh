@@ -64,7 +64,8 @@ if [[ $REAL -eq 1 ]]; then
 	for SERVER in `cat /tmp/tssh_servers`; do
 		if [[ $DRY -ne 1 ]]; then
 			sleep 0.1
-			tmux splitw "bash -c 'ssh $SERVER'"
+			echo "ssh $SERVER" > /tmp/bash-rcfilie
+			tmux splitw "bash --rcfile /tmp/bash-rcfile"
 			tmux select-layout tiled
 		else
 			echo $SERVER
