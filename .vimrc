@@ -21,10 +21,10 @@ set nocompatible        " be iMproved
 	set smartindent
 	set autoindent          " indent at the same level of the previous line
 	set mouse=a             " automatically enable mouse usage
-	set ttymouse=xterm2	    " make vim works in tmux
+	set ttymouse=xterm2	" make vim works in tmux
 
 	if !has('gui')
-		set term=$TERM        " Make arrow and other keys work
+		set term=$TERM  " Make arrow and other keys work
 	endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -102,9 +102,9 @@ set nocompatible        " be iMproved
 	"" Clang Complete
 		Bundle 'Rip-Rip/clang_complete'
 		autocmd FileType make setlocal noexpandtab
-		autocmd FileType hpp setlocal expandtab shiftwidth=2 tabstop=2
-		autocmd FileType h setlocal expandtab shiftwidth=2 tabstop=2
-		autocmd FileType cpp setlocal expandtab shiftwidth=2 tabstop=2
+		autocmd FileType hpp setlocal expandtab shiftwidth=2 tabstop=2 cino=N-s
+		autocmd FileType h setlocal expandtab shiftwidth=2 tabstop=2 cino=N-s
+		autocmd FileType cpp setlocal expandtab shiftwidth=2 tabstop=2 cino=N-s
 		function! SwitchSourceHeader()
 			if (expand ("%:e") == "cpp")
 				find %:t:r.hpp
