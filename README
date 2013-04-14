@@ -1,4 +1,0 @@
-git clone --recursive https://github.com/appaquet/app-vim.git ~/.app-vim
-ln -s ~/.app-vim/.vim ~/.vim
-ln -s ~/.app-vim/.vimrc ~/.vimrc
-vim +BundleInstall +qall
