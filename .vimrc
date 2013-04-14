@@ -2,6 +2,7 @@ set nocompatible        " be iMproved
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" Misc settings
+""
 
 	syntax on
 	filetype plugin on
@@ -27,8 +28,13 @@ set nocompatible        " be iMproved
 		set term=$TERM  " Make arrow and other keys work
 	endif
 
+	"" Autoclose the scratch buffer after omnicomplete selection
+	autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
+	autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"" Macvim Cmd shorcuts
+"" Buffer shortcuts
+""
 
 	map <D-1> :br!<CR> 
 	map <Leader>1 :br!<CR> 
@@ -63,43 +69,66 @@ set nocompatible        " be iMproved
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" Plugins
 
-	"" Vundle bundle manager (vim +BundleInstall +qall)
+	""
+	"" Vundle bundle manager 
+	""     -> Bundle manager. To download/update bundles execute: vim +BundleInstall +qall 
+	""
 		set rtp+=~/.vim/bundle/vundle/
 		call vundle#rc()
 		Bundle 'gmarik/vundle'
 
+	""
 	"" Nerdtree
+	""     -> Show a file tree when you press ctrl-e
+	""
 		Bundle 'scrooloose/nerdtree'
 		map <C-e> :NERDTreeToggle<CR>:NERDTreeMirror<CR>
 
+	""
 	"" MiniBufExplorer
+	""     -> Add a "tab" bar on the top to swich between buffers
+	""
 		let g:miniBufExplorerMoreThanOne=1
 		let g:miniBufExplModSelTarget = 1
 		let g:miniBufExplMapWindowNavVim = 1 
 		let g:miniBufExplUseSingleClick = 1
 		Bundle 'fholgado/minibufexpl.vim'
 
+	""
 	"" Powerline
+	""     -> Add an awesome status line
+	""
 		Bundle 'Lokaltog/vim-powerline'
 
+	""
 	"" Ctrlp
+	""     -> Fuzy search in file name / tags
+	""
 		let g:ctrlp_working_path_mode=0
 		let g:ctrlp_persistent_input=0
 		set wildignore+=*/.git*,*/.hg/*,*/.svn/*,*/_*,*/.DS*,*/.*swp,*/*.d,*/*.o
 		Bundle 'kien/ctrlp.vim'
 
+	""
 	"" Ack
+	""     -> Ack wrapper (find in files)
+	""
 		if executable('ack')
 			Bundle 'mileszs/ack.vim'
 		endif
 
+	""
 	"" Pig filetype
+	""     -> Pig syntax
+	""
 		Bundle 'vim-scripts/pig.vim'
 		augroup filetypedetect
 			au BufNewFile,BufRead *.pig set filetype=pig syntax=pig
 		augroup END
 
 	"" Clang Complete
+	""     -> Clang C++ completion
+	""
 		Bundle 'Rip-Rip/clang_complete'
 		autocmd FileType make setlocal noexpandtab
 		autocmd FileType hpp setlocal expandtab shiftwidth=2 tabstop=2 cino=N-s
@@ -115,26 +144,51 @@ set nocompatible        " be iMproved
 
 		nmap <leader>s :call SwitchSourceHeader()<CR>
 
+	"" Supertab 
+	""    -> Bind omnicomplete to tab
+	""
+		Bundle 'ervandew/supertab'
+
+	"" Multiple-cursors
+	""    -> Ctrl-n on a word and then ctrl-n to select next, next, next and do
+	""       modification on all of them)
+	""
+		Bundle 'terryma/vim-multiple-cursors'
+
 	"" Syntastic
+	""    -> C++ syntax checker and error checker on save
+	""
 		Bundle 'scrooloose/syntastic'
 		let g:syntastic_cpp_compiler_options = '-std=c++0x'
 		let g:syntastic_cpp_check_header = 1
 
+	""
 	"" Bclose
+	""     -> Close current buffer (without messing up everything like bd)
+	""
 		Bundle 'cespare/vim-bclose'
 		map <D-0> <Plug>Kwbd
 		nmap <leader>w <Plug>Kwbd
 
-	"" Pythoncomplete
-		Bundle 'vim-scripts/pythoncomplete'
+	""
+	"" Jedi-vim
+	""     -> Completes python
+	""
+		Bundle 'davidhalter/jedi-vim'
 
+	""
 	"" JSON
+	""    -> JSON syntax
+	""
 		Bundle 'vim-scripts/JSON.vim'
 		augroup filetypedetect
 			au! BufRead,BufNewFile *.json set filetype=json 
 		augroup END
 
+	""
 	"" Solarized theme
+	""     -> Nice theme, especially for macvim/gvim
+	""
 		Bundle 'altercation/vim-colors-solarized'
 		if filereadable(expand("~/.vim/bundle/vim-colors-solarized/colors/solarized.vim"))
 			color solarized                 " load a colorscheme
