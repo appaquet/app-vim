@@ -6,6 +6,7 @@ usage: $0 [options] <host regex>
 
 OPTIONS:
 -h              Show this message
+-c              Open in current tmux shell
 -d              Run in dry mode (only print servers that would open)
 -s <name>	Tmux session name
 -i <regex>	Filter servers (inclusion)
@@ -13,12 +14,13 @@ OPTIONS:
 EOF
 }
 
+CURRENT=0
 DRY=0
 REAL=0
 ONE_FILTER=0
 cat ~/etc/tssh_servers.txt > /tmp/tssh_servers
 PARAMS=$*
-while getopts "hdri:e:s:" OPTION; do
+while getopts "hdcri:e:s:" OPTION; do
 	case $OPTION in
 		h)  
 			usage
@@ -26,6 +28,9 @@ while getopts "hdri:e:s:" OPTION; do
 		;;  
 		r)
 			REAL=1
+		;;
+		c)
+			CURRENT=1
 		;;
 		d)  
 			DRY=1
@@ -79,7 +84,11 @@ if [[ $REAL -eq 1 ]]; then
 	fi
 else
 	if [[ $DRY -ne 1 ]]; then
-		tmux new "exec $0 -r $PARAMS"	
+		if [[ $CURRENT -ne 1 ]]; then
+			tmux new "exec $0 -r $PARAMS"	
+		else
+			tmux new-window "exec $0 -r $PARAMS"
+		fi
 	else
 		$0 -r $PARAMS
 	fi
