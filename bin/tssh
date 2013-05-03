@@ -36,11 +36,13 @@ while getopts "hdri:e:s:" OPTION; do
 		;;
 		i)  
 			ONE_FILTER=1
+			OPTARG=${OPTARG//"DD"/"[0-9]\+"}
 			cat /tmp/tssh_servers | grep "$OPTARG" > /tmp/tssh_filter
 			mv /tmp/tssh_filter /tmp/tssh_servers
 		;;  
 		e)  
 			ONE_FILTER=1
+			OPTARG=${OPTARG//"DD"/"[0-9]\+"}
 			cat /tmp/tssh_servers | grep -v "$OPTARG" > /tmp/tssh_filter
 			mv /tmp/tssh_filter /tmp/tssh_servers
 		;;  
@@ -50,7 +52,8 @@ shift $((OPTIND-1))
 
 if [[ "$*" != "" ]]; then
 	ONE_FILTER=1
-	cat /tmp/tssh_servers | grep "$*" > /tmp/tssh_filter
+	OPTARG=${*//"DD"/"[0-9]\+"}
+	cat /tmp/tssh_servers | grep "$OPTARG" > /tmp/tssh_filter
 	mv /tmp/tssh_filter /tmp/tssh_servers
 fi
 
