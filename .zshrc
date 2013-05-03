@@ -43,5 +43,6 @@ ZSH_THEME="robbyrussell"
 plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
+source ~/.zshrc_local
 
 # Customize to your needs...
