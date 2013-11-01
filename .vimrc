@@ -67,6 +67,15 @@ set nocompatible        " be iMproved
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"" File types tab preferences
+autocmd FileType make setlocal noexpandtab
+autocmd FileType hpp setlocal expandtab shiftwidth=2 tabstop=2 cino=N-s
+autocmd FileType h setlocal expandtab shiftwidth=2 tabstop=2 cino=N-s
+autocmd FileType cpp setlocal expandtab shiftwidth=2 tabstop=2 cino=N-s
+autocmd FileType rb setlocal expandtab shiftwidth=2 tabstop=2 cino=N-s
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" Plugins
 
 	""
@@ -130,10 +139,6 @@ set nocompatible        " be iMproved
 	""     -> Clang C++ completion
 	""
 		Bundle 'Rip-Rip/clang_complete'
-		autocmd FileType make setlocal noexpandtab
-		autocmd FileType hpp setlocal expandtab shiftwidth=2 tabstop=2 cino=N-s
-		autocmd FileType h setlocal expandtab shiftwidth=2 tabstop=2 cino=N-s
-		autocmd FileType cpp setlocal expandtab shiftwidth=2 tabstop=2 cino=N-s
 		function! SwitchSourceHeader()
 			if (expand ("%:e") == "cpp")
 				find %:t:r.hpp
@@ -151,7 +156,8 @@ set nocompatible        " be iMproved
 
 	"" Multiple-cursors
 	""    -> Ctrl-n on a word and then ctrl-n to select next, next, next and do
-	""       modification on all of them)
+	""       modification on all of them). Ctrl-x to skip one, Ctrl-p to
+	""       go to previous one
 	""
 		Bundle 'terryma/vim-multiple-cursors'
 
@@ -184,6 +190,32 @@ set nocompatible        " be iMproved
 		augroup filetypedetect
 			au! BufRead,BufNewFile *.json set filetype=json 
 		augroup END
+
+	""
+	"" Markdown
+	""    -> Markdown file support (.md)
+	""
+		Bundle 'tpope/vim-markdown'
+
+
+	""
+	"" Command Caps
+	""    -> Allow to take into account common shift typo like :Wq instead
+	""       of :wq because shift is held for too long
+	""
+		Bundle 'takac/vim-commandcaps'
+
+	""
+	"" Fugitive
+	""    -> Git plugin. 
+	""       -> Gstatus = git status
+	""       -> press - to add/reset a file
+	""       -> Gcommit
+	""       -> Gblame
+	""       -> Ggrep
+	""       -> Glog
+	""
+		Bundle 'tpope/vim-fugitive'
 
 	""
 	"" Solarized theme
