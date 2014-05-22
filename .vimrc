@@ -72,6 +72,7 @@ autocmd FileType make setlocal noexpandtab
 autocmd FileType hpp setlocal expandtab shiftwidth=2 tabstop=2 cino=N-s
 autocmd FileType h setlocal expandtab shiftwidth=2 tabstop=2 cino=N-s
 autocmd FileType cpp setlocal expandtab shiftwidth=2 tabstop=2 cino=N-s
+autocmd FileType scala setlocal expandtab shiftwidth=2 tabstop=2 cino=N-s
 autocmd FileType rb setlocal expandtab shiftwidth=2 tabstop=2 cino=N-s
 
 
@@ -115,7 +116,7 @@ autocmd FileType rb setlocal expandtab shiftwidth=2 tabstop=2 cino=N-s
 	""
 		let g:ctrlp_working_path_mode=0
 		let g:ctrlp_persistent_input=0
-		set wildignore+=*/.git*,*/.hg/*,*/.svn/*,*/_*,*/.DS*,*/.*swp,*/*.d,*/*.o
+		set wildignore+=*/.git*,*/.hg/*,*/.svn/*,*/_*,*/.DS*,*/.*swp,*/*.d,*/*.o,*/*.class,*/target/*
 		Bundle 'kien/ctrlp.vim'
 
 	""
@@ -237,6 +238,26 @@ autocmd FileType rb setlocal expandtab shiftwidth=2 tabstop=2 cino=N-s
 			set t_Co=256		    " make sure vim uses 256 colors
 		endif
 
+	""
+	"" Vim slime
+	""    -> Allow to send a line to a tmux pane/window
+	""       -> Open vim in a top pane (pane #0) and open a bottom pane (11)
+	""       -> Do ctrl-b q and note the destination pane id
+	""       -> Use ctrl-c ctrl-c to send whole file or selected line
+	""       -> First usage, select default and select :<WINDOW_ID>.<PANE ID> (ex: 5.1 for window 5, pane 1)
+	""
+
+		Bundle 'jpalardy/vim-slime'
+		let g:slime_target = "tmux"
+
+	""
+	"" Scala
+	""   -> Scala support
+	""
+		Bundle 'derekwyatt/vim-scala'
+		augroup filetypedetect
+			au BufNewFile,BufRead *.scala set filetype=scala syntax=scala
+		augroup END
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" Local overrides
