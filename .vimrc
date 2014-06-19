@@ -67,13 +67,32 @@ set nocompatible        " be iMproved
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"" File types tab preferences
-autocmd FileType make setlocal noexpandtab
-autocmd FileType hpp setlocal expandtab shiftwidth=2 tabstop=2 cino=N-s
-autocmd FileType h setlocal expandtab shiftwidth=2 tabstop=2 cino=N-s
-autocmd FileType cpp setlocal expandtab shiftwidth=2 tabstop=2 cino=N-s
-autocmd FileType scala setlocal expandtab shiftwidth=2 tabstop=2 cino=N-s
-autocmd FileType rb setlocal expandtab shiftwidth=2 tabstop=2 cino=N-s
+"" Identation preferences
+""
+
+" Defaults to tabs
+setlocal noexpandtab shiftwidth=4 tabstop=4 cino=N-s
+
+" Some files forced to spaces
+autocmd FileType hpp setlocal expandtab shiftwidth=2 tabstop=2 cino=N-s<CR>
+autocmd FileType h setlocal expandtab shiftwidth=2 tabstop=2 cino=N-s<CR>
+autocmd FileType cpp setlocal expandtab shiftwidth=2 tabstop=2 cino=N-s<CR>
+autocmd FileType scala setlocal expandtab shiftwidth=2 tabstop=2 cino=N-s<CR>
+autocmd FileType rb setlocal expandtab shiftwidth=2 tabstop=2 cino=N-s<CR>
+
+
+" Allow switching by doing <leader><tab>
+nmap <leader><tab> :call SwitchTab()<CR>
+function! SwitchTab()
+  if (&l:expandtab)
+    echo "Switched to Tabs"
+    setlocal noexpandtab shiftwidth=4 tabstop=4 cino=N-s<CR>
+  else
+    echo "Switched to Spaces"
+    setlocal expandtab shiftwidth=2 tabstop=2 cino=N-s<CR>
+  endif
+endfunction
+
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
