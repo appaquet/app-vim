@@ -22,15 +22,11 @@ set nocompatible        " be iMproved
 	set smartindent
 	set autoindent          " indent at the same level of the previous line
 	set mouse=a             " automatically enable mouse usage
-	set ttymouse=xterm2	" make vim works in tmux
+	set ttymouse=xterm2	    " make vim works in tmux
 
 	if !has('gui')
-		set term=$TERM  " Make arrow and other keys work
+		set term=$TERM      " Make arrow and other keys work
 	endif
-
-	"" Autoclose the scratch buffer after omnicomplete selection
-	autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
-	autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" Buffer shortcuts
@@ -56,15 +52,38 @@ set nocompatible        " be iMproved
 	map <Leader>9 :br!<CR>:bn! 8<CR>
 	map <Leader>] :bn!<CR>
 	map <Leader>[ :bp!<CR>
+	map <D-s> :w<CR>
+	map <Leader>s :w<CR>
+	map <D-q> :q<CR>
+	map <Leader>q :q<CR>
+
 
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" Key mapping
 
-	" For when you forget to sudo.. Really Write the file.	
-	cmap w!! w !sudo tee % >/dev/null    
+" For when you forget to sudo.. Really Write the file.	
+cmap w!! w !sudo tee % >/dev/null    
+cmap wq wqa
+cmap qw wqq
 
+" Allow creating a file in current buffer's directory
+fun! NewCfd( arg )
+  execute 'e %:p:h/' . a:arg
+endfunction
+command! -nargs=* E call NewCfd( '<args>' )
+command! -nargs=* New call NewCfd( '<args>' )
+
+
+" Delete current file. You need to close it after
+"
+fun! DeleteCfd( arg )
+  let l:curfile = expand("%")
+  silent exe ":!rm ". l:curfile
+  silent exe "bwipe! " . l:curfile
+endfunction
+command! -nargs=* Delete call DeleteCfd( '<args>' )
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" Identation preferences
@@ -108,10 +127,11 @@ endfunction
 
 	""
 	"" Nerdtree
-	""     -> Show a file tree when you press ctrl-e
+	""     -> Show a file tree when you press ctrl-e, select current file <leader> e
 	""
 		Bundle 'scrooloose/nerdtree'
 		map <C-e> :NERDTreeToggle<CR>:NERDTreeMirror<CR>
+		map <Leader>e :NERDTreeFind<CR>
 
 	""
 	"" MiniBufExplorer
@@ -139,12 +159,14 @@ endfunction
 		Bundle 'kien/ctrlp.vim'
 
 	""
-	"" Ack
+	""  Ack
 	""     -> Ack wrapper (find in files)
 	""
 		if executable('ack')
 			Bundle 'mileszs/ack.vim'
+			map <Leader>a :Ack <cword><CR>
 		endif
+
 
 	""
 	"" Pig filetype
@@ -167,12 +189,31 @@ endfunction
 			endif
 		endfunction
 
-		nmap <leader>s :call SwitchSourceHeader()<CR>
+		au FileType cpp nmap <leader>s :call SwitchSourceHeader()<CR>
+		au FileType hpp nmap <leader>s :call SwitchSourceHeader()<CR>
 
-	"" Supertab 
-	""    -> Bind omnicomplete to tab
+
+
+	"" YouCompleteMe
+	""     -> Detects when to trigger auto complete automatically
+	""   !Warning! May clash with clang complete according to their website??
 	""
-		Bundle 'ervandew/supertab'
+		Bundle 'Valloric/YouCompleteMe'
+		let g:ycm_autoclose_preview_window_after_insertion = 1 " Auto close after inserted (smarter than default vim)
+
+	"" Go support
+	""     -> Go support, see https://github.com/fatih/vim-go for help
+	""
+		Bundle 'fatih/vim-go'
+		augroup filetypedetect
+			au BufNewFile,BufRead *.go set filetype=go syntax=go
+		augroup END
+		au FileType go nmap <leader>r <Plug>(go-run)
+		au FileType go nmap <leader>d <Plug>(go-def)
+		au FileType go nmap <leader>b <Plug>(go-build)
+		au FileType go nmap <leader>t <Plug>(go-test)
+		au FileType go nmap <leader>i <Plug>(go-info)
+		au FileType go nmap <leader>m :!make<CR>
 
 	"" Multiple-cursors
 	""    -> Ctrl-n on a word and then ctrl-n to select next, next, next and do
@@ -182,7 +223,7 @@ endfunction
 		Bundle 'terryma/vim-multiple-cursors'
 
 	"" Syntastic
-	""    -> C++ syntax checker and error checker on save
+	""    -> Multiple languages syntax checker (php, c++, scala, etc.)
 	""
 		Bundle 'scrooloose/syntastic'
 		let g:syntastic_cpp_compiler_options = '-std=c++0x'
@@ -277,6 +318,29 @@ endfunction
 		augroup filetypedetect
 			au BufNewFile,BufRead *.scala set filetype=scala syntax=scala
 		augroup END
+
+
+	""
+	"" Rename
+	""   -> Rename current file, keeping it in same directory
+	""      -> Rename[!] <newname>
+	""
+		Bundle 'vim-scripts/Rename2'
+
+	""
+	"" DelimitMat
+	""   -> Magically closes parenthesis, brackets, etc.
+	""
+		Bundle 'Raimondi/delimitMate'
+
+	""
+	"" EasyMotion
+	""   -> Allow to quickly move into a file with:
+	""      -> <leader><leader>w to go to words
+	""      -> <leader><leader>f<car> to go to a character
+	""
+		Bundle 'Lokaltog/vim-easymotion'
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" Local overrides

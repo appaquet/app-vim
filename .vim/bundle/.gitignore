@@ -2,6 +2,8 @@
 *vim
 vim-*
 Auto*
+Rename*
+YouComplete*
 PIV
 nerdtree
 python*
@@ -9,3 +11,4 @@ clang_complete
 syntastic
 supertab
 ZoomWin
+delim*
