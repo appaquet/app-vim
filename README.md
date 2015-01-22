@@ -12,8 +12,9 @@ VIM setup
 
 ZSH setup
 =========
-	ln -s ~/.app-vim/.oh-my-zsh ~/.oh-my-zsh
+	ln -s ~/.app-vim/oh-my-zsh ~/.oh-my-zsh
 	ln -s ~/.app-vim/.zshrc ~/.zshrc
+	touch ~/.zshrc_local
 
 Environment setup
 =================
