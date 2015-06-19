@@ -19,7 +19,6 @@ set nocompatible        " be iMproved
 	set hidden              " Buffer switching without saving
 
 	set autoread            " Auto reread modified file
-	set smartindent
 	set autoindent          " indent at the same level of the previous line
 	set mouse=a             " automatically enable mouse usage
 	set ttymouse=xterm2	    " make vim works in tmux
@@ -89,8 +88,8 @@ command! -nargs=* Delete call DeleteCfd( '<args>' )
 "" Identation preferences
 ""
 
-" Defaults to tabs
-setlocal noexpandtab shiftwidth=4 tabstop=4 cino=N-s
+" Defaults to spaces
+setlocal expandtab shiftwidth=2 tabstop=2 cino=N-s<CR>
 
 " Some files forced to spaces
 autocmd FileType hpp setlocal expandtab shiftwidth=2 tabstop=2 cino=N-s<CR>
@@ -238,12 +237,6 @@ endfunction
 		nmap <leader>w <Plug>Kwbd
 
 	""
-	"" Jedi-vim
-	""     -> Completes python
-	""
-		Bundle 'davidhalter/jedi-vim'
-
-	""
 	"" JSON
 	""    -> JSON syntax
 	""
@@ -340,6 +333,7 @@ endfunction
 	""      -> <leader><leader>f<car> to go to a character
 	""
 		Bundle 'Lokaltog/vim-easymotion'
+
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
