@@ -19,10 +19,10 @@ ZSH setup
 
 TMUX setup
 ==========
-  Install GNU GREP: brew install https://raw.github.com/Homebrew/homebrew-dupes/master/grep.rb (see https://github.com/erikw/tmux-powerline)
-  ln -s ~/.app-vim/.tmux.conf ~/.tmux.conf
-  ln -s ~/.app-vim/.tmux-powerline ~/.tmux-powerline
-  ln -s ~/.app-vim/.tmux-powerlinerc ~/.tmux-powerlinerc
+	Install GNU GREP: brew install https://raw.github.com/Homebrew/homebrew-dupes/master/grep.rb (see https://github.com/erikw/tmux-powerline)
+	ln -s ~/.app-vim/.tmux.conf ~/.tmux.conf
+	ln -s ~/.app-vim/.tmux-powerline ~/.tmux-powerline
+	ln -s ~/.app-vim/.tmux-powerlinerc ~/.tmux-powerlinerc
 
 Environment setup
 =================
