@@ -19,13 +19,14 @@ ZSH setup
 
 TMUX setup
 ==========
+  Install GNU GREP: brew install https://raw.github.com/Homebrew/homebrew-dupes/master/grep.rb (see https://github.com/erikw/tmux-powerline)
   ln -s ~/.app-vim/.tmux.conf ~/.tmux.conf
   ln -s ~/.app-vim/.tmux-powerline ~/.tmux-powerline
   ln -s ~/.app-vim/.tmux-powerlinerc ~/.tmux-powerlinerc
 
 Environment setup
 =================
-Either ln ~/.app-vim/bin to ~/bin and then add ~/bin to your path (.bashrc or .profile) or
+Either ln ~/.app-vim/bin to ~/bin and then add ~/bin to your path (.zshrc_local) or
 add ~/.app-vim/bin to your path directly
 
 
