@@ -45,6 +45,9 @@ plugins=(git github osx sbt scala knife vagrant web-search battery go tmux rsync
 
 PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
 source $ZSH/oh-my-zsh.sh
-source ~/.zshrc_local
 
 # Customize to your needs...
+alias ll="ls -ls"
+export EDITOR=vim
+
+source ~/.zshrc_local
