@@ -96,6 +96,7 @@ autocmd FileType hpp setlocal expandtab shiftwidth=2 tabstop=2 cino=N-s<CR>
 autocmd FileType h setlocal expandtab shiftwidth=2 tabstop=2 cino=N-s<CR>
 autocmd FileType cpp setlocal expandtab shiftwidth=2 tabstop=2 cino=N-s<CR>
 autocmd FileType scala setlocal expandtab shiftwidth=2 tabstop=2 cino=N-s<CR>
+autocmd FileType lua setlocal expandtab shiftwidth=2 tabstop=2 cino=N-s<CR>
 autocmd FileType rb setlocal expandtab shiftwidth=2 tabstop=2 cino=N-s<CR>
 
 
