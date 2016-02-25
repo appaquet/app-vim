@@ -1,3 +1,16 @@
+# Easy installation
+Download installer
+========
+	curl https://raw.githubusercontent.com/guignol/app-vim/patch-1/installer.sh installer.sh
+	
+Execute installed
+========
+	./installer.sh
+
+
+
+
+# Manual installation
 
 Checkout
 ========
