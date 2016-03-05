@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 # cleaning existing files
 rm -rf ~/.app-vim
