@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # cleaning existing files
 rm -rf ~/.app-vim
 rm -rf ~/.vim
