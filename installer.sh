@@ -8,6 +8,8 @@ rm -rf ~/.tmux.conf
 rm -rf ~/.tmux-powerline
 rm -rf ~/.tmux-powerlinerc
 
+sudo apt-get install python-dev
+sudo apt-get install cmake
 # cloning this repo
 git clone --recursive https://github.com/appaquet/app-vim.git ~/.app-vim
 
