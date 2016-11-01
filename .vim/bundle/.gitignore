@@ -1,3 +1,4 @@
+!Vundle.vim
 *.vim
 *vim
 vim-*
@@ -12,3 +13,4 @@ syntastic
 supertab
 ZoomWin
 delim*
+vundle
