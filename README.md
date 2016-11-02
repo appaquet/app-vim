@@ -20,6 +20,7 @@ Dependencies
 	cd ~/.vim/bundle/YouCompleteMe/
 	./install.sh   (you may need to install cmake & python-dev)
 ```
+
 ZSH setup
 =========
 ```
@@ -36,11 +37,11 @@ Dependencies
 	ln -s ~/.app-vim/.tmux.conf ~/.tmux.conf
 	ln -s ~/.app-vim/.tmux-powerline ~/.tmux-powerline
 	ln -s ~/.app-vim/.tmux-powerlinerc ~/.tmux-powerlinerc
+  cp ~/.app-vim/tmux-theme.sh ~/.tmux-powerline/theme/
 ```
 
 Environment setup
 =================
 Either ln ~/.app-vim/bin to ~/bin and then add ~/bin to your path (.zshrc_local) or
 add ~/.app-vim/bin to your path directly
-
 

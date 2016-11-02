@@ -26,8 +26,8 @@ set nocompatible        " be iMproved
   set exrc                " allow project specific .vimrc
   set secure              " (https://andrew.stwrt.ca/posts/project-specific-vimrc/)
 
-  if !has('gui')
-    set term=$TERM      " Make arrow and other keys work
+  if !has('gui_running')
+    set term=$TERM        " Make arrow and other keys work
   endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -145,9 +145,12 @@ endfunction
   "" Airline (Powerline + Minibufexp alternative)
   ""
     Plugin 'vim-airline/vim-airline'
-    Plugin 'vim-airline/vim-airline-themes'
     let g:airline#extensions#tabline#enabled = 1
-    let g:airline_theme='solarized'
+    if !has('gui_running')
+      let g:airline_powerline_fonts = 1
+      Plugin 'vim-airline/vim-airline-themes'
+      let g:airline_theme='base16_tomorrow'
+    endif
 
   ""
   "" Ctrlp
