@@ -7,7 +7,6 @@ set nocompatible        " be iMproved
   syntax on
   filetype plugin on
 
-  set background=dark     " Assume a dark background
   set backspace=2
   set ruler               " show the ruler
   set showmatch           " show matching brackets/parenthesis
@@ -26,8 +25,14 @@ set nocompatible        " be iMproved
   set exrc                " allow project specific .vimrc
   set secure              " (https://andrew.stwrt.ca/posts/project-specific-vimrc/)
 
+  "" Push yanked to osx clipboard (needs reattach-to-user-namespace)
+  set clipboard=unnamed
+
+  set background=dark     " Assume a dark background
   if !has('gui_running')
     set term=$TERM        " Make arrow and other keys work
+  else
+    set background=light
   endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
