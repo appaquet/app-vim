@@ -1,3 +1,6 @@
+# This repo isn't used anymore. See my new [`dotfiles`](https://github.com/appaquet/dotfiles`).
+
+
 # Easy installation
 Download & Execute installer
 ========
