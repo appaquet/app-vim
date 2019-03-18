@@ -1,4 +1,4 @@
-# This repo isn't used anymore. See my new [`dotfiles`](https://github.com/appaquet/dotfiles`).
+# This repo isn't used anymore. See my new [`dotfiles`](https://github.com/appaquet/dotfiles).
 
 
 # Easy installation
